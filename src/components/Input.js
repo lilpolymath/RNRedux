@@ -2,19 +2,12 @@ import React, {Component} from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 
 export class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputValue: '',
-    };
-  }
-
-  onChange = text => {
-    this.setState({inputValue: text});
+  state = {
+    inputValue: '',
   };
 
   render() {
-    const {placeholder} = this.props;
+    const {placeholder, onChange} = this.props;
     const {inputValue} = this.state;
 
     return (
@@ -23,7 +16,7 @@ export class Input extends Component {
           style={styles.textInput}
           value={inputValue}
           onChangeText={text => {
-            this.onChange(text);
+            onChange(text);
           }}
           placeholder={placeholder}
         />

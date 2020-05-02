@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import ListItem from '../components/ListItem';
+import {connect} from 'react-redux';
+import {deleteFood} from '../store/actions/food';
 
-export default class FoodList extends Component {
-  data = ['One', 'Two', 'Third'];
+class FoodList extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        {this.data.map(item => (
-          <ListItem name={item} />
-        ))}
-      </View>
+      <FlatList
+        data={this.props.data}
+        keyExtractor={(item, index) => item.key.toString()}
+        style={styles.container}
+        renderItem={data => (
+          <ListItem
+            onPress={() => this.props.delete(data.item.key)}
+            name={data}
+          />
+        )}
+      />
     );
   }
 }
@@ -22,3 +29,20 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+const mapStateToProps = state => {
+  return {
+    foods: state.foodReducer.FoodList,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    delete: key => dispatch(deleteFood(key)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(FoodList);

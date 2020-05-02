@@ -1,4 +1,4 @@
-import {ADD_FOOD, DELETE_FOOD} from '../../actions/actionTypes';
+import {ADD_FOOD, DELETE_FOOD} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   foodList: [],
