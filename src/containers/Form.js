@@ -15,6 +15,10 @@ class Form extends Component {
     this.setState({food: text});
   };
 
+  submitForm = food => {
+    this.props.add(food);
+  };
+
   render() {
     const {food} = this.state;
 
@@ -26,12 +30,7 @@ class Form extends Component {
           handleChange={text => this.handleChange(text)}
           placeholder="Enter your favourite food"
         />
-        <Button
-          onPress={() => {
-            this.props.add(food);
-          }}
-          name="Submit"
-        />
+        <Button onPress={() => this.submitForm(food)} name="Submit" />
       </View>
     );
   }
