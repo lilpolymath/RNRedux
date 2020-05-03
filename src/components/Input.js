@@ -1,31 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 
-export class Input extends Component {
-  state = {
-    inputValue: '',
-  };
-
-  render() {
-    const {placeholder, onChange} = this.props;
-    const {inputValue} = this.state;
-
-    return (
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          value={inputValue}
-          onChangeText={text => {
-            onChange(text);
-          }}
-          placeholder={placeholder}
-        />
-      </View>
-    );
-  }
-}
-
-export default Input;
+const Input = ({placeholder, inputValue, handleChange}) => {
+  return (
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.textInput}
+        value={inputValue}
+        onChangeText={handleChange}
+        placeholder={placeholder}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -43,3 +30,5 @@ const styles = StyleSheet.create({
     height: 40,
   },
 });
+
+export default Input;

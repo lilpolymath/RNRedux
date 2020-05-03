@@ -1,9 +1,9 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const ListItem = ({name}) => {
+const ListItem = ({name, deleteFood}) => {
   return (
-    <TouchableOpacity style={styles.itemContainer}>
+    <TouchableOpacity onPress={deleteFood} style={styles.itemContainer}>
       <Text>{name}</Text>
     </TouchableOpacity>
   );

@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, Alert} from 'react-native';
 import ListItem from '../components/ListItem';
 import {connect} from 'react-redux';
 import {deleteFood} from '../store/actions/food';
 
 class FoodList extends Component {
+  deleteFood = item => {
+    Alert.alert('Success', `You have successfully deleted ${item.name}`);
+
+    this.props.delete(item.key);
+  };
+
   render() {
     return (
       <FlatList
-        data={this.props.data}
-        keyExtractor={(item, index) => item.key.toString()}
+        data={this.props.foods}
+        keyExtractor={(item, index) => index}
         style={styles.container}
         renderItem={data => (
           <ListItem
-            onPress={() => this.props.delete(data.item.key)}
-            name={data}
+            onPress={this.deleteFood}
+            deleteFood={() => this.deleteFood(data.item)}
+            name={data.item.name}
           />
         )}
       />
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    foods: state.foodReducer.FoodList,
+    foods: state.foods.foodList,
   };
 };
 
