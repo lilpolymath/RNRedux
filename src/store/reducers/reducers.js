@@ -17,7 +17,7 @@ const foodReducer = (state = INITIAL_STATE, action) => {
     case DELETE_FOOD:
       return {
         ...state,
-        foodList: state.foodList.filter(item => item.key !== key),
+        foodList: state.foodList.filter(item => item.key !== action.key),
       };
     default:
       return state;
